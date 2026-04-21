@@ -4,6 +4,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
 import java.time.Duration;
 
 public class AddRemoveElementTest {
@@ -18,15 +20,14 @@ public class AddRemoveElementTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://the-internet.herokuapp.com/add_remove_elements/");
         driver.findElement(By.xpath("//button[text()='Add Element']")).click();
-        System.out.println("Первый элемент успешно добавлен!");
         driver.findElement(By.xpath("//button[text()='Add Element']")).click();
-        System.out.println("Второй элемент успешно добавлен!");
+        SoftAssert softAssert = new SoftAssert();
         int size = driver.findElements(By.xpath("//button[text()='Delete']")).size();
-        Assert.assertEquals(size, 2);
+        softAssert.assertEquals(size, 2, "Количество кнопок Delete не совпадает!");
         driver.findElement(By.xpath("//button[text()='Delete']")).click();
         int size1 = driver.findElements(By.xpath("//button[text()='Delete']")).size();
-        Assert.assertEquals(size1, 1);
-        System.out.println("Один элемент с текстом 'Delete' успешно удален, остался один добавленный элемент.");
+        softAssert.assertEquals(size1, 1, "Количество кнопок Delete не совпадает!");
         driver.quit();
+        softAssert.assertAll();
     }
 }

@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 public class InputsTest {
     @Test
@@ -18,31 +18,22 @@ public class InputsTest {
         driver.get("https://the-internet.herokuapp.com/inputs");
         WebElement inputField = driver.findElement(By.tagName("input"));
         inputField.sendKeys("100");
-        System.out.println("Поле 'Input' успешно заполнено значением: 100.");
         inputField.sendKeys(Keys.ARROW_UP);
-        String valAfterUp = inputField.getAttribute("value");
-        System.out.println("После нажатия стрелки 'Вверх', поле 'Input' изменило значение на расчитанное по формуле: 100 + 1 = " + valAfterUp);
-        Assert.assertEquals(valAfterUp, "101");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(inputField.getAttribute("value"), "101", "Ошибка при нажатии ARROW_UP");
         inputField.sendKeys(Keys.ARROW_DOWN);
         inputField.sendKeys(Keys.ARROW_DOWN);
-        String valAfterDown = inputField.getAttribute("value");
-        System.out.println("После нажатия стрелки 'Вниз', поле 'Input' изменило значение на расчитанное по формуле: 100 - 1 = " + valAfterDown);
-        Assert.assertEquals(valAfterDown, "99");
+        softAssert.assertEquals(inputField.getAttribute("value"), "99", "Ошибка при нажатии ARROW_DOWN");
         inputField.clear();
         inputField.sendKeys("Ввожу текст на русском для примера");
-        String valueAfterText1 = inputField.getAttribute("value");
-        System.out.println("После ввода текста 'Ввожу текст на русском для примера' значение поля 'Input' не изменилось и = '" + valueAfterText1 + "'");
-        Assert.assertEquals(valueAfterText1, "");
+        softAssert.assertEquals(inputField.getAttribute("value"), "", "Поле приняло кириллицу, а не должно");
         inputField.clear();
         inputField.sendKeys("I'm entering text in English as an example");
-        String valueAfterText2 = inputField.getAttribute("value");
-        System.out.println("После ввода текста 'I'm entering text in English as an example' значение поля 'Input' не изменилось и = '" + valueAfterText2 + "'");
-        Assert.assertEquals(valueAfterText2, "");
+        softAssert.assertEquals(inputField.getAttribute("value"), "", "Поле приняло латиницу, а не должно");
         inputField.clear();
         inputField.sendKeys("%*&&%#*%&@&(*&@+@+$!+");
-        String valueAfterSymbol = inputField.getAttribute("value");
-        System.out.println("После ввода ряда символов '%*&&%#*%&@&(*&@+@+$!+' значение поля 'Input' не изменилось и = '" + valueAfterSymbol + "'");
-        Assert.assertEquals(valueAfterSymbol, "");
+        softAssert.assertEquals(inputField.getAttribute("value"), "", "Поле приняло спецсимволы, а не должно");
         driver.quit();
+        softAssert.assertAll();
     }
 }
