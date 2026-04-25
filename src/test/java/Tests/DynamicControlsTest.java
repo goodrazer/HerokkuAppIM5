@@ -6,7 +6,6 @@ import org.testng.asserts.SoftAssert;
 public class DynamicControlsTest extends BaseTest{
 
     @Test
-
     public void checkDynamicControls() {
         dynamicControlsPage.openDynamicControlsPage();
         dynamicControlsPage.getTextElementTitleDynamicControls();

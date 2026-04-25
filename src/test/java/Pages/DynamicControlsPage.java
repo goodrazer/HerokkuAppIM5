@@ -4,14 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class DynamicControlsPage {
 
     WebDriver driver;
     WebDriverWait wait;
-
     private final By BUTTON_REMOVE = By.xpath("//button[text()='Remove']");
     private final By ELEMENT_ITS_GONE = By.id("message");
     private final By ELEMENT_CHECKBOX = By.cssSelector("#checkbox");

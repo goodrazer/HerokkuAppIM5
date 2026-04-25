@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class DropdownTest {
+
     @Test
     public void DropdownElement() {
         ChromeOptions options = new ChromeOptions();

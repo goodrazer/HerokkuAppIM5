@@ -10,7 +10,6 @@ import java.time.Duration;
 public class ContextMenuTest extends BaseTest{
 
     @Test
-
     public void checkContextMenu() {
         SoftAssert softAssert = new SoftAssert();
         contextMenu.openPageContextMenu();

@@ -9,7 +9,6 @@ public class FileUploaderPage {
 
     WebDriver driver;
     WebDriverWait wait;
-
     private final By INPUT_FILE_UPLOAD = By.id("file-upload");
     private final By TITLE_PAGE_FILE_UPLOADER = By.xpath("//H3");
     private final By BUTTON_UPLOAD = By.id("file-submit");

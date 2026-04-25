@@ -6,7 +6,6 @@ import org.testng.asserts.SoftAssert;
 public class FileUploaderTest extends BaseTest{
 
     @Test
-
     public void checkFileUploaderPage() {
         fileUploaderPage.openFileUploaderPage();
         fileUploaderPage.getTextElementTitleFileUploader();
