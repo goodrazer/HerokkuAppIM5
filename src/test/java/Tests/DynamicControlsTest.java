@@ -8,7 +8,7 @@ public class DynamicControlsTest extends BaseTest{
     @Test
     public void checkDynamicControls() {
         dynamicControlsPage.openDynamicControlsPage();
-        dynamicControlsPage.getTextElementTitleDynamicControls();
+        dynamicControlsPage.isDynamicControlsPageOpened();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(dynamicControlsPage.getTextElementTitleDynamicControls(),
                 "Dynamic Controls", "Переход на страницу Dynamic Controls не выполнен!");

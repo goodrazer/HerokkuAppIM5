@@ -8,8 +8,14 @@ import java.time.Duration;
 
 public class DynamicControlsPage {
 
+    public DynamicControlsPage(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
     WebDriver driver;
     WebDriverWait wait;
+
     private final By BUTTON_REMOVE = By.xpath("//button[text()='Remove']");
     private final By ELEMENT_ITS_GONE = By.id("message");
     private final By ELEMENT_CHECKBOX = By.cssSelector("#checkbox");
@@ -18,13 +24,12 @@ public class DynamicControlsPage {
     private final By ELEMENT_ITS_ENABLED = By.id("message");
     private final By ELEMENT_TITLE_DYNAMIC_CONTROLS = By.xpath("//H4");
 
-    public DynamicControlsPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    }
-
     public void openDynamicControlsPage() {
         driver.get("https://the-internet.herokuapp.com/dynamic_controls");
+    }
+
+    public void isDynamicControlsPageOpened(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ELEMENT_TITLE_DYNAMIC_CONTROLS));
     }
 
     public String getTextElementTitleDynamicControls() {

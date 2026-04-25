@@ -8,7 +8,7 @@ public class FileUploaderTest extends BaseTest{
     @Test
     public void checkFileUploaderPage() {
         fileUploaderPage.openFileUploaderPage();
-        fileUploaderPage.getTextElementTitleFileUploader();
+        fileUploaderPage.isFileUploaderPageOpened();
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(fileUploaderPage.getTextElementTitleFileUploader(),
                 "File Uploader", "Переход на страницу File Uploader не выполнен!");

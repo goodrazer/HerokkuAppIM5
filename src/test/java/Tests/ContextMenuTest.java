@@ -12,8 +12,11 @@ public class ContextMenuTest extends BaseTest{
     @Test
     public void checkContextMenu() {
         SoftAssert softAssert = new SoftAssert();
-        contextMenu.openPageContextMenu();
-        contextMenu.clickContextMenu();
+        contextMenuPage.openPageContextMenu();
+        contextMenuPage.isContextPageOpened();
+        softAssert.assertEquals(contextMenuPage.getTextElementTitleContextMenu(),
+                "Context Menu", "Переход на страницу Context Menu не выполнен!");
+        contextMenuPage.clickContextMenu();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         String actualTextAlert = alert.getText();
@@ -21,7 +24,7 @@ public class ContextMenuTest extends BaseTest{
         softAssert.assertEquals(expectedTextAlert, actualTextAlert,
                 "Текст алерта не соответствует ожидаемому!");
         alert.accept();
-        softAssert.assertEquals(contextMenu.getTextElementTitleContextMenu(),
+        softAssert.assertEquals(contextMenuPage.getTextElementTitleContextMenu(),
                 "Context Menu", "Модальное окно 'Alert' не закрылось!");
         softAssert.assertAll();
     }
